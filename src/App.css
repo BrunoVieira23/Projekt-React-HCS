@@ -1,13 +1,24 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("./assets/world_background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed; /* Keep the background fixed while scrolling */
+}
+
 .header-container {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   padding: 20px;
-  background-color: #ff0000;
+  background-color: transparent;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  z-index: 9999;
 }
 
 .navbar-links {
