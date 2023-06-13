@@ -1,29 +1,19 @@
 import React from "react";
+import aboutImage from "./assets/batmanLogo.png";
+import "./AboutComponent.css";
 
 const AboutPage = () => {
   return (
-    <div>
-      <h1>About Us</h1>
-      <p>
-        Welcome to our website! We are a team of passionate individuals
-        dedicated to providing high-quality services/products to our customers.
+    <div className="container">
+      <h1>About Me!</h1>
+      <h2>The Batman!</h2>
+      <img className="profile-image" src={aboutImage} alt="About Us" />
+      <p className="resume">
+        "Criminals are a superstitious cowardly lot. So my disguise must be able
+        to strike terror into their hearts. I must be a creature of the night,
+        black, terrible... a . a... a bat! That's it! It's an omen. I shall
+        become a bat!" ― Bruce Wayne
       </p>
-      <p>
-        Our mission is to deliver exceptional experiences and exceed customer
-        expectations. We believe in continuous improvement and strive to
-        innovate in all aspects of our business.
-      </p>
-      <p>
-        Whether you're a new customer or a long-time supporter, we appreciate
-        your trust and loyalty. We're here to serve you and provide the best
-        solutions tailored to your needs.
-      </p>
-      <p>
-        Feel free to explore our website and learn more about our offerings. If
-        you have any questions or feedback, please don't hesitate to contact us.
-        We'd love to hear from you!
-      </p>
-      <p>Thank you for choosing us.</p>
     </div>
   );
 };
