@@ -1,29 +1,38 @@
 import React from "react";
+import "./LocationComponent.css"; // Import the CSS file for styling
 
 const LocationComponent = () => {
   return (
     <div>
-      <h1>Location</h1>
-      <p>
-        Welcome to our website! We are a team of passionate individuals
-        dedicated to providing high-quality services/products to our customers.
-      </p>
-      <p>
-        Our mission is to deliver exceptional experiences and exceed customer
-        expectations. We believe in continuous improvement and strive to
-        innovate in all aspects of our business.
-      </p>
-      <p>
-        Whether you're a new customer or a long-time supporter, we appreciate
-        your trust and loyalty. We're here to serve you and provide the best
-        solutions tailored to your needs.
-      </p>
-      <p>
-        Feel free to explore our website and learn more about our offerings. If
-        you have any questions or feedback, please don't hesitate to contact us.
-        We'd love to hear from you!
-      </p>
-      <p>Thank you for choosing us.</p>
+      <h1>Locations</h1>
+      <div className="image-row">
+        <div className="image-column">
+          <img src="placeholder1.jpg" alt="Placeholder 1" />
+          <p>Text 1</p>
+        </div>
+        <div className="image-column">
+          <img src="placeholder2.jpg" alt="Placeholder 2" />
+          <p>Text 2</p>
+        </div>
+        <div className="image-column">
+          <img src="placeholder3.jpg" alt="Placeholder 3" />
+          <p>Text 3</p>
+        </div>
+      </div>
+      <div className="image-row">
+        <div className="image-column">
+          <img src="placeholder4.jpg" alt="Placeholder 4" />
+          <p>Text 4</p>
+        </div>
+        <div className="image-column">
+          <img src="placeholder5.jpg" alt="Placeholder 5" />
+          <p>Text 5</p>
+        </div>
+        <div className="image-column">
+          <img src="placeholder6.jpg" alt="Placeholder 6" />
+          <p>Text 6</p>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,9 @@
+.image-row {
+  display: flex;
+}
+
+.image-column {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+}
