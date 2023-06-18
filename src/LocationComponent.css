@@ -13,4 +13,18 @@
   height: 150px;
   object-fit: cover;
   border-radius: 5px;
+  transition: filter 0.3s, transform 0.3s;
+}
+
+p {
+  transition: color 0.3s;
+}
+
+.image-column:hover .thumbnail {
+  filter: brightness(80%);
+  transform: scale(1.05);
+}
+
+.image-column:hover p {
+  color: blue;
 }
