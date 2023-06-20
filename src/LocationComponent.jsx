@@ -5,9 +5,20 @@ import "./LocationComponent.css";
 mapboxgl.accessToken =
   "pk.eyJ1IjoicHVzaGt5IiwiYSI6ImNsaXJjZzdtMjB0YzIzZW54bGdxdzh0a3kifQ.mUiM41Sn-m3rLnvKF7xusw";
 
-const MapComponent = ({ location }) => {
+const cities = [
+  { name: "Porto, Portugal", coordinates: [-8.611, 41.1496] },
+  { name: "Praia, Cabo Verde", coordinates: [-23.5087, 14.9331] },
+  { name: "Rio de Janeiro, Brasil", coordinates: [-43.1729, -22.9068] },
+  { name: "Tokyo, Japan", coordinates: [139.6917, 35.6895] },
+  { name: "Tucson, USA", coordinates: [-110.9747, 32.2226] },
+  { name: "Hamburg, Germany", coordinates: [9.9937, 53.5511] },
+];
+
+const LocationComponent = () => {
   const mapContainerRef = useRef(null);
   const [map, setMap] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [marker, setMarker] = useState(null);
 
   useEffect(() => {
     const initializeMap = () => {
@@ -37,16 +48,22 @@ const MapComponent = ({ location }) => {
   }, [map]);
 
   useEffect(() => {
-    if (map && location) {
-      map.flyTo({ center: [0, 0], zoom: 1 });
+    if (map && selectedLocation) {
+      const city = cities.find((city) => city.name === selectedLocation);
+      if (city) {
+        map.flyTo({ center: city.coordinates, zoom: 10 });
+
+        if (marker) {
+          marker.remove();
+        }
+
+        const newMarker = new mapboxgl.Marker({ color: "#FF0000" })
+          .setLngLat(city.coordinates)
+          .addTo(map);
+        setMarker(newMarker);
+      }
     }
-  }, [map, location]);
-
-  return <div ref={mapContainerRef} className="map-container" />;
-};
-
-const LocationComponent = () => {
-  const [selectedLocation, setSelectedLocation] = useState(null);
+  }, [map, selectedLocation]);
 
   const handleLocationClick = (location) => {
     setSelectedLocation(location);
@@ -56,60 +73,18 @@ const LocationComponent = () => {
     <div>
       <h1>Locations</h1>
       <div className="image-row">
-        <div className="image-column">
-          <img src="./src/assets/Porto.jpg" alt="Porto" className="thumbnail" />
-          <p onClick={() => handleLocationClick("Porto, Portugal")}>
-            Porto, Portugal
-          </p>
-        </div>
-        <div className="image-column">
-          <img
-            src="./src/assets/PraiaCV.jpg"
-            alt="Praia"
-            className="thumbnail"
-          />
-          <p onClick={() => handleLocationClick("Praia, Cabo Verde")}>
-            Praia, Cabo Verde
-          </p>
-        </div>
-        <div className="image-column">
-          <img
-            src="./src/assets/RiodeJaneiro.jpg"
-            alt="Rio de Janeiro"
-            className="thumbnail"
-          />
-          <p onClick={() => handleLocationClick("Rio de Janeiro, Brasil")}>
-            Rio de Janeiro, Brasil
-          </p>
-        </div>
+        {cities.map((city) => (
+          <div className="image-column" key={city.name}>
+            <img
+              src={`./src/assets/${city.name}.jpg`}
+              alt={city.name}
+              className="thumbnail"
+            />
+            <p onClick={() => handleLocationClick(city.name)}>{city.name}</p>
+          </div>
+        ))}
       </div>
-      <div className="image-row">
-        <div className="image-column">
-          <img src="./src/assets/Tokyo.jpg" alt="Tokyo" className="thumbnail" />
-          <p onClick={() => handleLocationClick("Tokyo, Japan")}>
-            Tokyo, Japan
-          </p>
-        </div>
-        <div className="image-column">
-          <img
-            src="./src/assets/Tucson.jpg"
-            alt="Tucson"
-            className="thumbnail"
-          />
-          <p onClick={() => handleLocationClick("Tucson, USA")}>Tucson, USA</p>
-        </div>
-        <div className="image-column">
-          <img
-            src="./src/assets/Hamburg.jpg"
-            alt="Hamburg"
-            className="thumbnail"
-          />
-          <p onClick={() => handleLocationClick("Hamburg, Germany")}>
-            Hamburg, Germany
-          </p>
-        </div>
-      </div>
-      {selectedLocation && <MapComponent location={selectedLocation} />}
+      <div ref={mapContainerRef} className="map-container" />
     </div>
   );
 };
